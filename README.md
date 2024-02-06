@@ -10,7 +10,7 @@ Este proyecto es una aplicación web de ecommerce desarrollada utilizando React.
    Primero, clona este repositorio en tu máquina local. Puedes hacerlo ejecutando el siguiente comando en tu terminal:
 
    ```bash
-   git clone https://github.com/ArcayuS8/Sprint3_Lab1.git
+   git clone https://github.com/ArcayuS8/Ecommerce.git
 
 2. **Instala las dependencias**
    Una vez clonado el repositorio, navega hasta el directorio de la aplicación y ejecuta el siguiente comando para instalar todas las dependencias necesarias:
