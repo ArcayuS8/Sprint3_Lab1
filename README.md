@@ -15,7 +15,7 @@ Este proyecto es una aplicación web de ecommerce desarrollada utilizando React.
 2. **Instala las dependencias**
    Una vez clonado el repositorio, navega hasta el directorio de la aplicación y ejecuta el siguiente comando para instalar todas las dependencias necesarias:
    ```bash
-   cd Sprint3_Lab1
+   cd Ecommerce
    npm install
 
 3. **Inicia la aplicación**
