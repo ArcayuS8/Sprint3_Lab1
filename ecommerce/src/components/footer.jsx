@@ -1,8 +1,8 @@
 import '../styles/Footer.css';
 
-function Footer() {
+function Footer(darkMode) {
   return (
-    <footer className="footer">
+    <footer className={darkMode ? 'footer dark-mode' : 'footer'}>
       <div className="footer-container">
         <div className="footer-section">
           <h2>Contacto</h2>

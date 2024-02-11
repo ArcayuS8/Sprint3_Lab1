@@ -34,3 +34,7 @@
 .copyright p {
   margin: 0;
 }
+
+.dark-mode .footer {
+  background-color: gray; /* Cambia el color de fondo para el modo oscuro */
+}

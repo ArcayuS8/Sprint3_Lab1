@@ -16,7 +16,10 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    position: relative;
+    justify-content: space-between;
+    /* align-items: center;
+    text-align: center;
+    position: relative; */
   }
   
   .product-image-container {
@@ -56,3 +59,21 @@
     align-self: flex-end;
   }
   
+  .product-add-to-cart {
+    margin-top: 5px; /* Ajusta el margen superior del botón según sea necesario */
+    text-align: center; 
+  }
+  
+  .product-add-to-cart button {
+    background-color: #4caf50; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Quita el borde del botón */
+    padding: 10px 20px; /* Ajusta el padding del botón según sea necesario */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 5px; /* Agrega bordes redondeados al botón */
+    transition: background-color 0.3s;
+  }
+  
+  .product-add-to-cart button:hover {
+    background-color: #0056b3; /* Cambia el color de fondo del botón al pasar sobre él */
+  }

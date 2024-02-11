@@ -1,0 +1,41 @@
+.cart-item {
+    display: flex; /* Hace que la tarjeta sea horizontal */
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-section {
+    margin: 0 auto; /* Centra horizontalmente el cart-section */
+    max-width: 800px; /* Establece un ancho máximo para evitar que el cart-section se extienda demasiado */
+}
+  
+.cart-product-image {
+    width: 80px; /* Tamaño de la imagen */
+    margin-right: 10px;
+}
+  
+.product-details {
+    flex: 1; /* El contenido se expandirá para llenar el espacio disponible */
+}
+  
+.product-details p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+  
+.total-price {
+    font-weight: bold; /* Aplica negrita al texto */
+}
+
+.cart-section .banner {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 128, 0.7)); /* Fondo difuminado de negro a azul oscuro */
+    color: white; /* Texto blanco */
+    padding: 1rem; /* Espaciado interno */
+    text-align: center; /* Centrado del texto */
+    margin: 1rem auto; /* Margen arriba y abajo */
+    border-radius: 10px; /* Bordes redondeados */
+    max-width: none;
+    
+}
