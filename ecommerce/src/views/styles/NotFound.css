@@ -1,0 +1,16 @@
+.not-found-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .go-home-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .go-home-link:hover {
+    text-decoration: underline;
+  }
+  

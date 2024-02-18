@@ -1,26 +1,28 @@
 import PropTypes from 'prop-types';
-import '../styles/ProductCard.css';
+import "../styles/ProductCard.css";
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.jsx";
+import AddToCart from "./AddToCart";
 
-function ProductCard({ product, onAddToCart }) {
+const ProductCard = ({ product }) => {
+  const { id, title, price, image } = product;
+  const { isLoggedIn } = useAuth();
 
   return (
-    <div className="product-card">
-      <div className="product-image-container">
-        <img className="product-image" src={product.image} alt={product.title} />
-      </div>
-      <div className="product-details">
-        <div className="product-title">
-          <h3>{product.title}</h3>
+    <div className="product-card" key={id}>
+      <Link to={`/product/${id}`}>
+        <div className="product-image-container">
+          <img className="product-image" src={image} alt={title} />
         </div>
-        <div className="product-description">{product.description}</div>
-        <div className="product-price">${product.price.toFixed(2)}</div>
-        <div className="product-add-to-cart">
-          <button onClick={() => onAddToCart(product)}>Añadir a la cesta</button>
+        <div className="product-details">
+          <h3 className="product-title">{title}</h3>
+          <p className="product-price">{`$${price}`}</p>
         </div>
-      </div>
+      </Link>
+      {isLoggedIn && <AddToCart item={product} />}
     </div>
   );
-}
+};
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
@@ -34,8 +36,7 @@ ProductCard.propTypes = {
       rate: PropTypes.number.isRequired,
       count: PropTypes.number.isRequired
     }).isRequired
-  }).isRequired,
-  onAddToCart: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default ProductCard;

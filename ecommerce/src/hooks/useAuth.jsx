@@ -1,31 +1,45 @@
-// useAuth.js
-import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { createContext, useState, useEffect, useContext } from "react";
 
-const useAuth = () => {
-  const [user, setUser] = useState(null);
+const AuthContext = createContext();
 
-  // Función para iniciar sesión
-  const login = (userData) => {
-    // Aquí podrías realizar validaciones mínimas de los datos del usuario, por ejemplo, verificar que haya un nombre y un correo electrónico
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData)); // Almacena los datos del usuario en el LocalStorage
-  };
-
-  // Función para cerrar sesión
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user'); // Elimina los datos del usuario del LocalStorage
-  };
+export const AuthProvider = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    // Recupera los datos del usuario del LocalStorage cuando el componente se monta
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("userData");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUserData(JSON.parse(storedUser));
+      setIsLoggedIn(true);
     }
   }, []);
 
-  return { user, login, logout };
+  const handleLogin = ({ name, email }) => {
+    setIsLoggedIn(true);
+    const userDataObj = { name, email };
+    setUserData(userDataObj);
+    localStorage.setItem("userData", JSON.stringify(userDataObj));
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserData({});
+    localStorage.removeItem("userData");
+  };
+
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, userData, handleLogin, handleLogout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export default useAuth;
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+
+AuthProvider.propTypes = {
+    children: PropTypes.object.isRequired
+  };
