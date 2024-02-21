@@ -1,0 +1,14 @@
+.product-add-to-cart {
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+  }
+  
+  .product-add-to-cart:hover {
+    background-color: #0056b3;
+  }

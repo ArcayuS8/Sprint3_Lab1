@@ -1,0 +1,38 @@
+.product-card {
+  border: 1px solid gray;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-image-container {
+  height: 300px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.product-details {
+  padding: 15px;
+}
+
+.product-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: blue;
+}
