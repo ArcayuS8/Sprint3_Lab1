@@ -1,45 +1,54 @@
 import PropTypes from 'prop-types';
 import { createContext, useState, useEffect, useContext } from "react";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("userData");
     if (storedUser) {
       setUserData(JSON.parse(storedUser));
-      setIsLoggedIn(true);
     }
+
+    setLoading(false);
   }, []);
 
   const handleLogin = ({ name, email }) => {
-    setIsLoggedIn(true);
-    const userDataObj = { name, email };
+    const userRole = email.includes("@admin") ? "admin" : "user";
+
+    const userDataObj = { name, email, role: userRole };
     setUserData(userDataObj);
     localStorage.setItem("userData", JSON.stringify(userDataObj));
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUserData({});
+    setUserData(null);
     localStorage.removeItem("userData");
   };
 
+  const authContextValue = {
+    userData,
+    loading,
+    handleLogin,
+    handleLogout,
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userData, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+
+  return context;
 };
 
-
 AuthProvider.propTypes = {
-    children: PropTypes.object.isRequired
-  };
+  children: PropTypes.node.isRequired
+};

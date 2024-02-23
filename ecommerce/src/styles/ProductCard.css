@@ -36,3 +36,19 @@
   font-weight: bold;
   color: blue;
 }
+
+.admin-icons {
+  position: relative;
+  top: 6px;
+  left: 300px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.admin-icons img {
+  width: 25px; 
+  height: auto; 
+  margin-bottom: 8px;
+  cursor: pointer;
+}

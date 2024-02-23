@@ -3,10 +3,14 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.jsx";
 
 function ProtectedRoute({ children }) {
-  const { isLoggedIn } = useAuth();
+  const { userData, loading } = useAuth();
   const location = useLocation();
 
-  return isLoggedIn ? children : <Navigate to={"/login"} state={location} />;
+  if (loading) {
+    return <>Loading...</>;
+  }
+
+  return userData ? children : <Navigate to={"/login"} state={location} />;
 }
 
 export default ProtectedRoute;
