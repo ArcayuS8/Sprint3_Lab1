@@ -7,17 +7,25 @@ import { AuthProvider } from "./hooks/useAuth.jsx";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router/index.jsx";
 import { FiltroProvider } from "./context/FilterContext.jsx";
+import store from "./store/store.js"
+import { Provider } from "react-redux";
+import { ProductsProvider } from "./hooks/useProducts.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <AuthProvider>
-        <CartProvider>
-          <FiltroProvider>
-            <RouterProvider router={router}></RouterProvider>
-          </FiltroProvider>
-        </CartProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+            <FiltroProvider>
+              <ProductsProvider> {/* Aquí envuelve tus componentes con ProductsProvider */}
+                <RouterProvider router={router}></RouterProvider>
+              </ProductsProvider>
+            </FiltroProvider>
+          </CartProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </Provider>
+    
   </React.StrictMode>
 );
