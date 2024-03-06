@@ -1,38 +1,27 @@
 // Aqui se renderiza un formulario donde los usuarios pueden ingresar su nombre y correo electrónico para iniciar sesión
 
-import { useState } from 'react';
 import "../styles/LoginForm.css";
 import { useAuth } from "../../hooks/useAuth.jsx";
 import { useLocation, useNavigate } from "react-router";
 
 const LoginForm = () => {
-  const { isLoggedIn, handleLogin, handleLogout, userData } = useAuth();
+  const { handleLogin, handleLogout, userData } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const nombre = form.nombre.value;
+    const email = form.email.value;
 
-    if (nombre.trim() && email.trim()) {
-      if (validateEmail(email)) {
-        handleLogin({ name: nombre, email });
-        navigate(location.state?.pathname || '/');
-        setNombre('');
-        setEmail('');
-      } else {
-        alert('Por favor, introduce un correo electrónico válido.');
-      }
+    if (nombre && email) {
+      handleLogin({ name: nombre, email });
+      navigate(location.state.pathname);
+      form.reset();
     } else {
-      alert('Por favor, completa todos los campos.');
+      alert("Por favor, completa todos los campos.");
     }
-  };
-
-  const validateEmail = (email) => {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
   };
 
   const onClickLogout = () => {
@@ -45,15 +34,15 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Nombre:
-          <input type="text" name="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+          <input type="text" name="nombre" />
         </label>
         <label>
           Email:
-          <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="email" name="email" />
         </label>
-        {!isLoggedIn && <button type="submit">Login</button>}
+        {!userData && <button type="submit">Login</button>}
       </form>
-      {isLoggedIn && (
+      {userData && (
         <div className="user-info">
           <button onClick={onClickLogout} type="button">
             Logout
