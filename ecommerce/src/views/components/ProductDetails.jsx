@@ -1,33 +1,55 @@
 // Aqui muestro los detalels de cada producto, utilizando el id para encontrarlos
 
-import products from "../../assets/data.json";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import "../styles/ProductDetails.css";
-import BackButton from "../../components/BackButton";
+import { useProducts } from "../../hooks/useProducts.jsx";
 import AddToCart from "../../components/AddToCart";
+import BackButton from "../../components/BackButton";
+import ErrorComponent from "../../components/ErrorComponent.jsx";
+import Loader from "../../components/Loader.jsx";
+import "../styles/ProductDetails.css";
 
 const ProductDetails = () => {
+  const [product, setProduct] = useState(null);
+  const { getProductById, loading, error } = useProducts();
   const { id } = useParams();
 
-  const product = products.find((product) => product.id === parseInt(id));
+  useEffect(() => {
+    const fetchData = async () => {
+      const productData = await getProductById(id);
+      setProduct(productData);
+    };
 
-  if (!product) {
-    return <p>Loading product...</p>;
+    fetchData();
+  }, [id]);
+
+  if (loading) {
+    <Loader />;
+  }
+
+  if (!product && !error) {
+    return <>No hay productos</>;
   }
 
   return (
-    <div className="product-details-container">
-      <div className="product-image">
-        <img src={product.image} alt={product.title} />
-        <BackButton />
-      </div>
-      <div className="product-details">
-        <h2 className="product-title">{product.title}</h2>
-        <p className="product-price">{`$${product.price}`}</p>
-        <p className="product-description">{product.description}</p>
-        <AddToCart item={product} />
-      </div>
-    </div>
+    <>
+      {error ? (
+        <ErrorComponent error={error} />
+      ) : (
+        <div className="product-details-container">
+          <div className="product-image">
+            <img src={product.image} alt={product.title} />
+            <BackButton />
+          </div>
+          <div className="product-details">
+            <h2 className="product-title">{product.title}</h2>
+            <p className="product-price">{`$${product.price}`}</p>
+            <p className="product-description">{product.description}</p>
+            <AddToCart item={product} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

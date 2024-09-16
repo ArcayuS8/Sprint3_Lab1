@@ -18,8 +18,22 @@ Este proyecto es una aplicación web de ecommerce desarrollada utilizando React.
    cd Ecommerce
    npm install
 
-3. **Inicia la aplicación**
-   Una vez que todas las dependencias estén instaladas, puedes iniciar la aplicación ejecutando el siguiente comando:
+3. **Preparamos la fakeApi**
+   Para preparar la Api de la que vamos a servir los datos primero "navegamos" hasta la carpeta donde tenemos los datos con el siguiente comando:
+   ```
+   cd src/assets
+   ```
+   Luego, introducimos el siguiente comando para "conectarnos" a la API:
+   ```
+   json-server --watch db.json
+   ```
+   Si hubo algún problema, ejecute primero el siguiente comando y luego vuelva a ejecutar el anterior:
+   ```
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+   ```
+
+5. **Inicia la aplicación**
+   Una vez que todas las dependencias estén instaladas y nos hemos "conectado" a nuestra fakeApi, podemos iniciar la aplicación ejecutando el siguiente comando:
    ```
    npm run dev
    ```
